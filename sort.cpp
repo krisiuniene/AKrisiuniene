@@ -10,15 +10,23 @@ int main(int argc, char *argv[])
 {
     int i, kiekS, kiekL, N = 50; 
     int *a = new int[N];
-  
-    /*if (KaDaryt) // Atsitiktinai sugeneruoja N skaičių intervale: 1,...,1000.*/
-     srand ( time(NULL) );
-    /* else // Savo nuožiūra įvedame skaičius. Norėdami baigti įvedimą, įvedame bet kokį simbolį - ne skaičių.
-    { N = 0; while (cin >> a[N]) N++; }*/
-   
-   /*cout<< "Isrinkimo algoritmas:"<<endl; 
-   selection(a, 0, N-1, kiekS, kiekL);*/
+    srand ( time(NULL) );
+   cout<< "Isrinkimo algoritmas:"<<endl; 
+    cout<< "_____Atsitiktine seka_____"<<endl; 
+    for (i = 0; i < N; i++)
+        a[i] = 1000*(1.0*rand()/RAND_MAX);
+    cout << "Ivestas skaiciu masyvas yra:" << endl;
+    for (i = 0; i < N; i++) cout << a[i] << " ";
+    cout << endl;
+    kiekS = 0;
+    kiekL = 0;
+    cout<< "Isrinkimo kiekL = "<<kiekL<<endl;
+    selection(a, 0, N-1, kiekS, kiekL);
+    cout<< "--------------------------------------"<<endl; 
+   //  for (i = 0; i < N; i++) cout << a[i] << " ";
     
+    cout<< "--------------------------------------"<<endl; 
+   /* 
     cout<< " Iterpimo algoritmas:"<<endl; 
     cout<< endl; 
     //_____Atsitiktine seka_____
@@ -32,8 +40,21 @@ int main(int argc, char *argv[])
     kiekL = 0;
     insertion(a, 0, N-1, kiekS, kiekL);
     cout<< "--------------------------------------"<<endl; 
-   // for (int i = N1; i < N2; i++)  a[i] = i;  
-   // insertion(a, 0, N-1, kiekS, kiekL); 
+    */
+    cout<< " Burbuliuko algoritmas:"<<endl; 
+    cout<< endl; 
+    //_____Atsitiktine seka_____
+    cout<< "_____Atsitiktine seka_____"<<endl; 
+    for (i = 0; i < N; i++)
+        a[i] = 1000*(1.0*rand()/RAND_MAX);
+    cout << "Ivestas skaiciu masyvas yra:" << endl;
+    for (i = 0; i < N; i++) cout << a[i] << " ";
+    cout << endl;
+    kiekS = 0;
+    kiekL = 0;
+    bubble(a, 0, N-1, kiekS, kiekL);
+    cout<< "--------------------------------------"<<endl; 
+       
     system("PAUSE");
     
 }
@@ -87,7 +108,10 @@ template <class T>
 void bubble(T a[], int l, int r,int &kiekS, int &kiekL)
   { for (int i = l; i < r; i++)
       for (int j = r; j > i; j--)
-        compexch(a[i-1], a[i], kiekS);
+        {
+        compexch(a[j-1], a[j], kiekS);
+        kiekL++; 
+        }
     cout << "Surusiuotas skaiciu masyvas yra:" << endl;
     // for (i = l; i < r; i++) cout << a[i] << " ";
     cout<<endl;
