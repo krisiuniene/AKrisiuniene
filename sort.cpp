@@ -3,35 +3,41 @@
 template <class T> void exch(T &, T &, int&);
 template <class T> void compexch(T &, T &, int&);
 template <class T> void selection(T *, int, int, int&, int&);
-template <class T> void insertion(T *, int, int);
-template <class T> void bubble(T *, int, int);
+template <class T> void insertion(T *, int, int, int&, int&);
+template <class T> void bubble(T *, int, int, int&, int&);
 using namespace std;
 int main(int argc, char *argv[])
 {
-    int i, N = 1000; 
-    int kiekS = 0;
-    int kiekL = 0;
-    //N = atoi(argv[1]), KaDaryt = atoi(argv[2]);
+    int i, kiekS, kiekL, N = 50; 
     int *a = new int[N];
+  
     /*if (KaDaryt) // Atsitiktinai sugeneruoja N skaičių intervale: 1,...,1000.*/
      srand ( time(NULL) );
-     for (i = 0; i < N; i++)
+    /* else // Savo nuožiūra įvedame skaičius. Norėdami baigti įvedimą, įvedame bet kokį simbolį - ne skaičių.
+    { N = 0; while (cin >> a[N]) N++; }*/
+   
+   /*cout<< "Isrinkimo algoritmas:"<<endl; 
+   selection(a, 0, N-1, kiekS, kiekL);*/
+    
+    cout<< " Iterpimo algoritmas:"<<endl; 
+    cout<< endl; 
+    //_____Atsitiktine seka_____
+    cout<< "_____Atsitiktine seka_____"<<endl; 
+    for (i = 0; i < N; i++)
         a[i] = 1000*(1.0*rand()/RAND_MAX);
-   /* else // Savo nuožiūra įvedame skaičius. Norėdami baigti įvedimą, įvedame bet kokį simbolį - ne skaičių.
-      { N = 0; while (cin >> a[N]) N++; }*/
     cout << "Ivestas skaiciu masyvas yra:" << endl;
     for (i = 0; i < N; i++) cout << a[i] << " ";
     cout << endl;
-    selection(a, 0, N-1, kiekS, kiekL);
-    cout << "Surusiuotas skaiciu masyvas yra:" << endl;
-    for (i = 0; i < N; i++) cout << a[i] << " ";
-    cout<<endl;
-    cout<<"Sukeitimu skaicius: "<<kiekS<<endl;
-    cout<<"Lyginimu skaicius: "<<kiekL<<endl;
-       
+    kiekS = 0;
+    kiekL = 0;
+    insertion(a, 0, N-1, kiekS, kiekL);
+    cout<< "--------------------------------------"<<endl; 
+   // for (int i = N1; i < N2; i++)  a[i] = i;  
+   // insertion(a, 0, N-1, kiekS, kiekL); 
     system("PAUSE");
     
 }
+
 // Sukeicia elementus vietomis
 template <class T>
   void exch(T &A, T &B, int &kiekS)
@@ -40,7 +46,7 @@ template <class T>
 template <class T>
   void compexch(T &A, T &B, int &kiekS)
     { if (B < A) exch(A, B, kiekS); }
-// I�?rinkimo algoritmo realizacija
+// Isrinkimo algoritmo realizacija
 template <class T>
 void selection(T a[], int l, int r, int &kiekS, int &kiekL)
   { for (int i = l; i < r; i++)
@@ -52,24 +58,40 @@ void selection(T a[], int l, int r, int &kiekS, int &kiekL)
         }
         exch(a[i], a[min], kiekS);
       }
+    cout << "Surusiuotas skaiciu masyvas yra:" << endl;
+    // for (i = l; i < r; i++) cout << a[i] << " ";
+     cout<<endl;
+     cout<<"Sukeitimu skaicius: "<<kiekS<<endl;
+     cout<<"Lyginimu skaicius: "<<kiekL<<endl; 
   }
-// Įterpimo algoritmo realizacija
+// Iterpimo algoritmo realizacija
 template <class T>
-void insertion(T a[], int l, int r)
+void insertion(T a[], int l, int r,int &kiekS, int &kiekL)
   { int i;
-    for (i = r; i > l; i--) compexch(a[i-1], a[i]);
+    for (i = r; i > l; i--) compexch(a[i-1], a[i], kiekS);
     for (i = l+2; i <= r; i++)
       { int j = i; T v = a[i];
         while (v < a[j-1])
-          { a[j] = a[j-1]; j--; }
+          { a[j] = a[j-1]; j--; kiekL++;}
         a[j] = v;
+        kiekL++;
       }
+      cout << "Surusiuotas skaiciu masyvas yra:" << endl;
+    // for (i = l; i < r; i++) cout << a[i] << " ";
+     cout<<endl;
+     cout<<"Sukeitimu skaicius: "<<kiekS<<endl;
+     cout<<"Lyginimu skaicius: "<<kiekL<<endl;
   }
 // Burbulo algoritmas
 template <class T>
-void bubble(T a[], int l, int r)
+void bubble(T a[], int l, int r,int &kiekS, int &kiekL)
   { for (int i = l; i < r; i++)
       for (int j = r; j > i; j--)
-        compexch(a[j-1], a[j]);
+        compexch(a[i-1], a[i], kiekS);
+    cout << "Surusiuotas skaiciu masyvas yra:" << endl;
+    // for (i = l; i < r; i++) cout << a[i] << " ";
+    cout<<endl;
+    cout<<"Sukeitimu skaicius: "<<kiekS<<endl;
+    cout<<"Lyginimu skaicius: "<<kiekL<<endl;
   }
 
