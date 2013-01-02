@@ -11,74 +11,112 @@ template <class T> void siftDown( T *, int, int, int&, int&);
 using namespace std;
 int main(int argc, char *argv[])
 {
-    int i, kiekS, kiekL, N = 50; 
+    int i, kiekS, kiekL, N = 8; 
     int *a = new int[N];
     srand ( time(NULL) );
-   cout<< "Isrinkimo algoritmas:"<<endl; 
-    cout<< "_____Atsitiktine seka_____"<<endl; 
+    cout << endl;
+    
+    cout<< "-------Isrinkimo algoritmas:"<<endl; 
+    cout << endl;
+    cout<< "Atsitiktine seka:"<<endl; 
     for (i = 0; i < N; i++)
         a[i] = 1000*(1.0*rand()/RAND_MAX);
-    cout << "Ivestas skaiciu masyvas yra:" << endl;
-    for (i = 0; i < N; i++) cout << a[i] << " ";
-    cout << endl;
-   
+   // cout << "Ivestas skaiciu masyvas yra:" << endl;
+    //for (i = 0; i < N; i++) cout << a[i] << " ";
     kiekS = 0;
     kiekL = 0;
     selection(a, 0, N-1, kiekS, kiekL);
-   
-    cout<< "--------------------------------------"<<endl; 
+    cout << endl;
+    cout<< "Mazejanti seka:"<<endl; 
+    for (i = 0; i < N; i++)
+        a[i] = N-i;
+    kiekS = 0;
+    kiekL = 0;
+    selection(a, 0, N-1, kiekS, kiekL);  
+    cout << endl;
+    cout<< "Didejanti seka:"<<endl; 
+    for (i = 0; i < N; i++)
+    a[i] = ++i;
+    kiekS = 0;
+    kiekL = 0;
+    selection(a, 0, N-1, kiekS, kiekL);
+    cout << endl;
+
    //  for (i = 0; i < N; i++) cout << a[i] << " ";
-    
-    cout<< "--------------------------------------"<<endl; 
-   
-    cout<< " Iterpimo algoritmas:"<<endl; 
+//--------------------Iterpimo algoritmas:    
+ 
+    cout<< "-------Iterpimo algoritmas:"<<endl; 
     cout<< endl; 
-    
-    //_____Atsitiktine seka_____
-    cout<< "_____Atsitiktine seka_____"<<endl; 
+    cout<< "Atsitiktine seka:"<<endl; 
     for (i = 0; i < N; i++)
         a[i] = 1000*(1.0*rand()/RAND_MAX);
-    cout << "Ivestas skaiciu masyvas yra:" << endl;
-    for (i = 0; i < N; i++) cout << a[i] << " ";
-    cout << endl;
     kiekS = 0;
     kiekL = 0;
     insertion(a, 0, N-1, kiekS, kiekL);
-  
-    cout<< "--------------------------------------"<<endl; 
-    
-    cout<< " Burbuliuko algoritmas:"<<endl; 
     cout<< endl; 
-    //_____Atsitiktine seka_____
-    cout<< "_____Atsitiktine seka_____"<<endl; 
+    cout<< "Mazejanti seka:"<<endl; 
+    for (i = 0; i < N; i++)
+        a[i] = N-i;
+    kiekS = 0;
+    kiekL = 0;
+    insertion(a, 0, N-1, kiekS, kiekL);  
+    cout << endl;
+    cout<< "Didejanti seka:"<<endl; 
+    for (i = 0; i < N; i++)
+    a[i] = ++i;
+    kiekS = 0;
+    kiekL = 0;
+    insertion(a, 0, N-1, kiekS, kiekL);
+    cout << endl;
+  //------------------- Burbuliuko algoritmas:   
+    cout<< "-------Burbuliuko algoritmas:"<<endl;
+    cout << endl; 
+    cout<< "Atsitiktine seka:"<<endl; 
     for (i = 0; i < N; i++)
         a[i] = 1000*(1.0*rand()/RAND_MAX);
-    cout << "Ivestas skaiciu masyvas yra:" << endl;
-    for (i = 0; i < N; i++) cout << a[i] << " ";
-    cout << endl;
     kiekS = 0;
     kiekL = 0;
     bubble(a, 0, N-1, kiekS, kiekL);
-   
-    cout<< "--------------------------------------"<<endl; 
-    
-    cout<< "Heapsort algoritmas:"<<endl; 
-    cout<< endl; 
-    //_____Atsitiktine seka_____
-    cout<< "_____Atsitiktine seka_____"<<endl; 
-    for (i = 0; i < N; i++)
-        a[i] = 1000*(1.0*rand()/RAND_MAX);
-    cout << "Ivestas skaiciu masyvas yra:" << endl;
-    for (i = 0; i < N; i++) cout << a[i] << " ";
     cout << endl;
+    cout<< "Mazejanti seka:"<<endl; 
+    for (i = 0; i < N; i++)
+        a[i] = N-i;
     kiekS = 0;
     kiekL = 0;
-   
+    bubble(a, 0, N-1, kiekS, kiekL); 
+    cout << endl;
+    cout<< "Didejanti seka:"<<endl; 
+    for (i = 0; i < N; i++)
+    a[i] = ++i;
+    kiekS = 0;
+    kiekL = 0;
+    bubble(a, 0, N-1, kiekS, kiekL); 
+    cout<< endl; 
+ // -------------Heapsort algoritmas: 
+    cout<< "-------Heapsort algoritmas:"<<endl; 
+    cout << endl;
+    cout<< "Atsitiktine seka:"<<endl; 
+    for (i = 0; i < N; i++)
+        a[i] = 1000*(1.0*rand()/RAND_MAX);
+    kiekS = 0;
+    kiekL = 0;
     heapsort(a, N, kiekS, kiekL);
-    cout<< "--------------------------------------"<<endl; 
-    cout << "Surusiuotas skaiciu masyvas yra:" << endl;
-    for (i = 0; i < N; i++) cout << a[i] << " ";
     cout << endl;  
+    cout<< "Mazejanti seka:"<<endl; 
+    for (i = 0; i < N; i++)
+        a[i] = N-i;
+    kiekS = 0;
+    kiekL = 0;
+    heapsort(a, N, kiekS, kiekL);
+    cout << endl;
+    cout<< "Didejanti seka:"<<endl; 
+    for (i = 0; i < N; i++)
+    a[i] = ++i;
+    kiekS = 0;
+    kiekL = 0;
+    heapsort(a, N, kiekS, kiekL);
+    cout << endl;
+    cout<< "--------------------------------------"<<endl; 
     system("PAUSE");
     
 }
@@ -101,15 +139,15 @@ void selection(T a[], int l, int r, int &kiekS, int &kiekL)
         for (int j = i+1; j <= r; j++)
         {
             if (a[j] < a[min])  min = j;
-            kiekL++;// kiekL padydinama vienetu         
+            kiekL++;// kiekL padidinama vienetu         
         }
         exch(a[i], a[min], kiekS);
       }
   //  cout << "Surusiuotas skaiciu masyvas yra:" << endl;
     // for (i = l; i < r; i++) cout << a[i] << " ";
      cout<<endl;
-     cout<<"Sukeitimu skaicius: "<<kiekS<<endl;
-     cout<<"Lyginimu skaicius: "<<kiekL<<endl; 
+     cout<<"Sukeitimu: "<<kiekS<<endl;
+     cout<<"Lyginimu: "<<kiekL<<endl; 
   }
 // Iterpimo algoritmo realizacija
 template <class T>
@@ -126,8 +164,8 @@ void insertion(T a[], int l, int r,int &kiekS, int &kiekL)
      // cout << "Surusiuotas skaiciu masyvas yra:" << endl;
     // for (i = l; i < r; i++) cout << a[i] << " ";
      cout<<endl;
-     cout<<"Sukeitimu skaicius: "<<kiekS<<endl;
-     cout<<"Lyginimu skaicius: "<<kiekL<<endl;
+     cout<<"Sukeitimu: "<<kiekS<<endl;
+     cout<<"Lyginimu: "<<kiekL<<endl;
   }
 // Burbulo algoritmas
 template <class T>
@@ -139,8 +177,8 @@ void bubble(T a[], int l, int r,int &kiekS, int &kiekL)
         kiekL++; 
         }
     cout<<endl;
-    cout<<"Sukeitimu skaicius: "<<kiekS<<endl;
-    cout<<"Lyginimu skaicius: "<<kiekL<<endl;
+    cout<<"Sukeitimu: "<<kiekS<<endl;
+    cout<<"Lyginimu: "<<kiekL<<endl;
   }
 
 //Heapsort algoritmas
@@ -159,16 +197,17 @@ void heapsort( T *a, int count, int &kiekS, int &kiekL)
         siftDown(a, 0, end, kiekS, kiekL);
     }
     
-       cout<<endl;
-   cout<<"Sukeitimu skaicius: "<<kiekS<<endl;
-   cout<<"Lyginimu skaicius: "<<kiekL<<endl;
+   cout<<endl;
+   cout<<"Sukeitimu: "<<kiekS<<endl;
+   cout<<"Lyginimu: "<<kiekL<<endl;
 }
 template <class T> 
 void siftDown( T *a, int start, int end, int &kiekS, int &kiekL)
 {
     int root = start;
  
-    while ( root*2+1 < end ) {
+    while ( root*2+1 < end ) { 
+        kiekL++;
         int child = 2*root + 1;
         if ((child + 1 < end) && IS_LESS(a[child],a[child+1])) {
             child += 1;
@@ -176,7 +215,7 @@ void siftDown( T *a, int start, int end, int &kiekS, int &kiekL)
         if (IS_LESS(a[root], a[child])) {
             exch(a[child], a[root], kiekS); //sukeitimas
             root = child;
-            kiekL++;
+        
         }
         else
             return;
