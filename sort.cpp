@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 template <class T> void exch(T &, T &, int&);
-template <class T> void compexch(T &, T &, int&);
+template <class T> void compexch(T &, T &, int&, int&);
 template <class T> void selection(T *, int, int, int&, int&);
 template <class T> void insertion(T *, int, int, int&, int&);
 template <class T> void bubble(T *, int, int, int&, int&);
@@ -18,15 +18,16 @@ int main(int argc, char *argv[])
     cout << "Ivestas skaiciu masyvas yra:" << endl;
     for (i = 0; i < N; i++) cout << a[i] << " ";
     cout << endl;
+   
     kiekS = 0;
     kiekL = 0;
-    cout<< "Isrinkimo kiekL = "<<kiekL<<endl;
     selection(a, 0, N-1, kiekS, kiekL);
+   
     cout<< "--------------------------------------"<<endl; 
    //  for (i = 0; i < N; i++) cout << a[i] << " ";
     
     cout<< "--------------------------------------"<<endl; 
-   /* 
+   
     cout<< " Iterpimo algoritmas:"<<endl; 
     cout<< endl; 
     //_____Atsitiktine seka_____
@@ -39,8 +40,9 @@ int main(int argc, char *argv[])
     kiekS = 0;
     kiekL = 0;
     insertion(a, 0, N-1, kiekS, kiekL);
+  
     cout<< "--------------------------------------"<<endl; 
-    */
+    
     cout<< " Burbuliuko algoritmas:"<<endl; 
     cout<< endl; 
     //_____Atsitiktine seka_____
@@ -53,8 +55,11 @@ int main(int argc, char *argv[])
     kiekS = 0;
     kiekL = 0;
     bubble(a, 0, N-1, kiekS, kiekL);
+   
     cout<< "--------------------------------------"<<endl; 
-       
+   /* cout << "Surusiuotas skaiciu masyvas yra:" << endl;
+    for (i = 0; i < N; i++) cout << a[i] << " ";
+    cout << endl;  */
     system("PAUSE");
     
 }
@@ -65,8 +70,10 @@ template <class T>
     { T t = A ; A = B; B = t; kiekS++;} //kiekS padidinama vienetu
 // Sukeicia elementus vietomis tik jei patenkinta salyga
 template <class T>
-  void compexch(T &A, T &B, int &kiekS)
-    { if (B < A) exch(A, B, kiekS); }
+  void compexch(T &A, T &B, int &kiekS, int &kiekL)
+    { if (B < A) exch(A, B, kiekS); 
+     kiekL++;
+    }
 // Isrinkimo algoritmo realizacija
 template <class T>
 void selection(T a[], int l, int r, int &kiekS, int &kiekL)
@@ -79,7 +86,7 @@ void selection(T a[], int l, int r, int &kiekS, int &kiekL)
         }
         exch(a[i], a[min], kiekS);
       }
-    cout << "Surusiuotas skaiciu masyvas yra:" << endl;
+  //  cout << "Surusiuotas skaiciu masyvas yra:" << endl;
     // for (i = l; i < r; i++) cout << a[i] << " ";
      cout<<endl;
      cout<<"Sukeitimu skaicius: "<<kiekS<<endl;
@@ -89,7 +96,7 @@ void selection(T a[], int l, int r, int &kiekS, int &kiekL)
 template <class T>
 void insertion(T a[], int l, int r,int &kiekS, int &kiekL)
   { int i;
-    for (i = r; i > l; i--) compexch(a[i-1], a[i], kiekS);
+    for (i = r; i > l; i--) compexch(a[i-1], a[i], kiekS, kiekL);
     for (i = l+2; i <= r; i++)
       { int j = i; T v = a[i];
         while (v < a[j-1])
@@ -97,7 +104,7 @@ void insertion(T a[], int l, int r,int &kiekS, int &kiekL)
         a[j] = v;
         kiekL++;
       }
-      cout << "Surusiuotas skaiciu masyvas yra:" << endl;
+     // cout << "Surusiuotas skaiciu masyvas yra:" << endl;
     // for (i = l; i < r; i++) cout << a[i] << " ";
      cout<<endl;
      cout<<"Sukeitimu skaicius: "<<kiekS<<endl;
@@ -109,11 +116,9 @@ void bubble(T a[], int l, int r,int &kiekS, int &kiekL)
   { for (int i = l; i < r; i++)
       for (int j = r; j > i; j--)
         {
-        compexch(a[j-1], a[j], kiekS);
+        compexch(a[j-1], a[j], kiekS, kiekL);
         kiekL++; 
         }
-    cout << "Surusiuotas skaiciu masyvas yra:" << endl;
-    // for (i = l; i < r; i++) cout << a[i] << " ";
     cout<<endl;
     cout<<"Sukeitimu skaicius: "<<kiekS<<endl;
     cout<<"Lyginimu skaicius: "<<kiekL<<endl;
